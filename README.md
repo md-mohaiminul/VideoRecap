@@ -83,9 +83,16 @@ bash scripts/run_videorecap_clip.sh
 
 We provide our best model for both VideoRecap and VideoRecap-U. \
 **Download the pretrained models from [this link]()**
-1. Evaluate VideoRecap.\
-`bash scripts/eval_video_recap.sh`
+1. Evaluate VideoRecap.
+```bash
+bash scripts/eval_video_recap.sh
+```
 2. Evaluate VideoRecap-U.
 ```bash
 bash scripts/eval_video_recap_u.sh
 ```
+
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
