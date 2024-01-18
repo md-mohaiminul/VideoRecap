@@ -55,9 +55,9 @@ def main(args):
     tokenizer = AutoTokenizer.from_pretrained(args.decoder_name)
     
     all_loaders = []
-    #caption
+    #clip caption
     ori_text_feature_type = args.text_feature_type
-    if 'caption' in args.unify_type:
+    if 'clip' in args.unify_type:
         args.metadata = '/checkpoint/mohaiminul/VideoCapHier/datasets/captions_train.pkl'
         args.dataset = 'clip_caption'
         args.video_feature_type = 'pixel'
@@ -83,8 +83,8 @@ def main(args):
         all_loaders.append(caption_loader)
         
 
-    #clip summary
-    if 'clip' in args.unify_type:
+    #segment description
+    if 'segment' in args.unify_type:
         args = copy.deepcopy(args)
         args.metadata = '/checkpoint/mohaiminul/VideoCapHier/datasets/clip_summeries_train+pseudo.pkl'
         args.dataset = 'segment_description'

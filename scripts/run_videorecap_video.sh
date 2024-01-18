@@ -12,7 +12,7 @@ num_video_feat=512
 video_sampling_type=masking
 num_video_queries=256
 video_mapper_type=qformer
-video_feature_path=features/videos
+video_feature_path=features/videos # path to video features
 
 text_feature_type=token
 num_text_feat=512
@@ -22,17 +22,17 @@ text_mapper_type=qformer
 output_dir=outputs/videorecap/videos
 resume=pretrained_models/videorecap/videorecap_segment.pt
 
-# torchrun --nproc_per_node=8 train.py \
-#          --epochs $epochs --batch_size $batch_size \
-#          --dataset $dataset --metadata $metadata \
-#          --video_feature_path $video_feature_path \
-#          --video_feature_type $video_feature_type --num_video_feat $num_video_feat \
-#          --video_mapper_type $video_mapper_type --num_video_queries $num_video_queries \
-#          --video_sampling_type $video_sampling_type \
-#          --text_feature_type $text_feature_type --num_text_feat $num_text_feat \
-#          --text_mapper_type $text_mapper_type --num_text_queries $num_text_queries \
-#          --output_dir $output_dir --max_gen_tokens $max_gen_tokens \
-#          --resume $resume --save-freq 5
+torchrun --nproc_per_node=8 train.py \
+         --epochs $epochs --batch_size $batch_size \
+         --dataset $dataset --metadata $metadata \
+         --video_feature_path $video_feature_path \
+         --video_feature_type $video_feature_type --num_video_feat $num_video_feat \
+         --video_mapper_type $video_mapper_type --num_video_queries $num_video_queries \
+         --video_sampling_type $video_sampling_type \
+         --text_feature_type $text_feature_type --num_text_feat $num_text_feat \
+         --text_mapper_type $text_mapper_type --num_text_queries $num_text_queries \
+         --output_dir $output_dir --max_gen_tokens $max_gen_tokens \
+         --resume $resume --save-freq 5
 
 CUDA_VISIBLE_DEVICES=0 \
 python eval.py --metadata datasets/videos_val.json \

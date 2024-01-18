@@ -9,7 +9,7 @@ metadata=datasets/segments_train.pkl
 video_feature_type=cls
 num_video_feat=40
 num_video_queries=32
-video_feature_path=/data/mmiemon/LaVila/datasets/features/vclm_base/cls
+video_feature_path=features/segments #path to segments feature
 video_mapper_type=qformer
 video_sampling_type=uniform
 

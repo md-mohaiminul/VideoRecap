@@ -260,15 +260,21 @@ class VideoCaptionDataset(torch.utils.data.Dataset):
             
         elif self.args.dataset == 'segment_description':
             s = self.samples[i]
-            sid = s['sid']
-            if 'segment_description' in s:
-                sample['caption'] = s['segment_description']
-            video_features = np.load(f'{self.args.video_feature_path}/{sid}.npy')
+            if 'sid' in s:
+                sid = s['sid']
+                video_features = np.load(f'{self.args.video_feature_path}/{sid}.npy')
+            else:
+                video_features = np.load(f"{self.args.video_feature_path}/{s['vid']}.npy")
+                start = int(s['start_sec']/4) if 'start_sec' in s else 0
+                end = int(s['end_sec']//4) if 'end_sec' in s else video_features.shape[0]
+                video_features = video_features[start:end+1]
             if self.args.video_sampling_type=='uniform':
                 video_features = sample_features(video_features, self.args.video_sampling_type, self.args.num_video_feat)
             else:
                 video_features, video_mask = sample_features(video_features, self.args.video_sampling_type, self.args.num_video_feat)
                 sample['video_mask'] = video_mask
+            if 'segment_description' in s:
+                sample['caption'] = s['segment_description']
             
         elif self.args.dataset == 'video_summary':
             s = self.samples[i]

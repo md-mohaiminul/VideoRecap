@@ -3,13 +3,13 @@
 epochs=15
 batch_size=32 # 4
 dataset=segment_description
-metadata=datasets/segments_train.pkl
-metadata_pseudo=datasets/segments_train_pseudo.pkl
+metadata=datasets/segments_train.pkl #manually annotated data
+metadata_pseudo=datasets/segments_train_pseudo.pkl #LLM-generated pseudo-annotation
 
 video_feature_type=cls
 num_video_feat=40
 num_video_queries=32
-video_feature_path=/data/mmiemon/LaVila/datasets/features/vclm_base/cls
+video_feature_path=features/segments #path to segments feature
 video_mapper_type=qformer
 video_sampling_type=uniform
 
