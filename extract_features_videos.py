@@ -10,6 +10,7 @@ import numpy as np
 import pickle
 import math
 import csv
+import time
 
 import torchvision.transforms as transforms
 import torchvision.transforms._transforms_video as transforms_video
@@ -71,6 +72,7 @@ def main(args):
     
     total = 0
     for video in videos:
+        print((video['end_sec']-video['start_sec'])/60)
         metadata = []  
         for i in np.arange(0, video['end_sec'], args.feature_step):
             metadata.append([video['vid'], i, min(i+args.feature_step, video['end_sec'])])
@@ -98,7 +100,6 @@ def main(args):
         for s in seconds:
             features.append(all_features[s])
         features = np.stack(features)
-        print(video['vid'], features.shape, np.sum(features))
         dest = f"{args.output_dir}/{video['vid']}.npy"
         np.save(dest, features)
         

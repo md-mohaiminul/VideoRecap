@@ -54,13 +54,14 @@ class VideoRecap(nn.Module):
                 self.vision_model = clip_model.visual
             else:
                 vision_model = SpaceTimeTransformer(
-                    num_frames=4,
+                    num_frames=args.num_video_feat,
                     time_init='zeros',
                     attention_style='frozen-in-time',
                     ln_pre=True,
                     act_layer=QuickGELU,
                     is_tanh_gating=False,
                 )
+
                 clip_model, _ = load_openai_clip('ViT-B/16', 'cpu')
                 print("=> Loading CLIP (ViT-B/16) weights")
                 remapped_state_dict = remap_keys(clip_model.visual.state_dict(), transformer_layers=12)

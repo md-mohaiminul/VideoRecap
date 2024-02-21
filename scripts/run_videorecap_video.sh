@@ -8,18 +8,18 @@ dataset=video_summary
 metadata=datasets/videos_train.json
 
 video_feature_type=cls
-num_video_feat=512
+num_video_feat=256 #512
 video_sampling_type=masking
 num_video_queries=256
 video_mapper_type=qformer
 video_feature_path=features/videos # path to video features
 
 text_feature_type=token
-num_text_feat=512
-num_text_queries=256
+num_text_feat=256  #256
+num_text_queries=256  
 text_mapper_type=qformer
 
-output_dir=outputs/videorecap/videos
+output_dir=outputs/videorecap_256/videos
 resume=pretrained_models/videorecap/videorecap_segment.pt
 
 torchrun --nproc_per_node=8 train.py \

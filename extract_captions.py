@@ -127,7 +127,6 @@ def main(args):
                         jj = j * old_args.caption_num_return_sequences + k
                         generated_text_str = decode_one(generated_text_ids[jj], tokenizer).strip()
                         captions[start_sec] = sample + [generated_text_str]
-                        print(captions[start_sec])
 
         seconds = list(captions.keys())
         seconds.sort()

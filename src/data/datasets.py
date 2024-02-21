@@ -220,6 +220,13 @@ class VideoCaptionDataset(torch.utils.data.Dataset):
         else:
             self.samples = args.metadata
         
+        # new = []
+        # for s in self.samples:
+        #     dur = (s['end_sec'] - s['start_sec'])/60
+        #     if dur<=1:
+        #         new.append(s)
+        # self.samples = new
+        
         # if args.part is not None:
         #     step = math.ceil(len(self.samples)/8)
         #     print(args.part, args.part*step, (args.part+1)*step)
@@ -279,7 +286,6 @@ class VideoCaptionDataset(torch.utils.data.Dataset):
         elif self.args.dataset == 'video_summary':
             s = self.samples[i]
             if self.args.video_feature_type=='cls':
-                # if 'version' in s and s['version']=='v1':
                 if 'end_sec' not in s:
                     video_features = []
                     for c in self.samples[i]['sids']:
@@ -296,7 +302,7 @@ class VideoCaptionDataset(torch.utils.data.Dataset):
                     video_features = sample_features(video_features, self.args.video_sampling_type, self.args.num_video_feat)
                 else:
                     video_features, video_mask = sample_features(video_features, self.args.video_sampling_type, self.args.num_video_feat)
-                    sample['video_mask'] = video_mask
+                    sample['video_mask'] = video_mask  
             else:
                 video_features = None
             

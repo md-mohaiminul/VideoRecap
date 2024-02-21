@@ -23,4 +23,4 @@ torchrun --nproc_per_node=8 train.py --epochs $epochs \
 
 CUDA_VISIBLE_DEVICES=0 python eval.py \
             --metadata datasets/clips_val.pkl --eval_freq 100 \
-            --output_dir $output_dir --resume ${output_dir}/checkpoint.pt
+            --output_dir $output_dir --resume ${output_dir}
