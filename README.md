@@ -1,4 +1,4 @@
-# VideoRecap
+# Video ReCap
 
 This is the official implementation of our paper [Video ReCap: Recursive Captioning of Hour-Long Videos](link). ViderReCap is a recursive video captioning model that can process very long videos (e.g., hours long) and output video captions at multiple hierarchy levels: short-range clip captions, mid-range segment descriptions, and long-range video summaries. First, the model generates captions for short video clips of a few seconds. As we move up the hierarchy, the model uses sparsely sampled video features and captions generated at the previous hierarchy level as inputs to produce video captions for the current hierarchy level.
 
@@ -13,7 +13,7 @@ See [installation.md](installation.md) to install this code.
 (Note: This step is required for faster I/O. You can also evaluate the pretrained models without this step.)
 
 ## Ego4D-HCap Dataset
-See [datasets.md](datasets.md) to download and prepare datasets.
+[Download](https://drive.google.com/drive/folders/14cMn3iqVw_FdH_JUjXDTZNG8e6m0FbnC?usp=share_link) the dataset. See [datasets.md](datasets.md) for more details about the Ego4D-HCap Dataset.
 
 ## Download or extract features
 We utilize the video encoder of pretrained Dual-Encoder from [LaViLa](https://github.com/facebookresearch/LaViLa/blob/main/docs/MODEL_ZOO.md) to extract features. \
