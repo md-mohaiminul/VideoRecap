@@ -1,12 +1,22 @@
-#eval clip captions
+#eval clip captions if videos are cropped to 288px and chunked to 5 minutes (see scripts/crop_and_resize.sh)
 CUDA_VISIBLE_DEVICES=0 \
 python eval.py --metadata datasets/clips_val.pkl --eval_freq 100 \
                --output_dir outputs/clips \
-               --video_feature_type pixel --chunk_len -1 \
+               --video_feature_type pixel --video_loader_type decord --chunk_len 300 \
                --video_feature_path /data/mmiemon/datasets/ego4d/v1/video_540ss \
                --resume pretrained_models/videorecap/videorecap_clip.pt \
                --video_encoder_ckpt /data/mmiemon/LaVila/pretrained_models/clip_openai_timesformer_base.baseline.ep_0003.pth \
                --batch_size 32 --workers 10
+
+#eval clip captions if videos are raw Ego4D videos
+# CUDA_VISIBLE_DEVICES=0 \
+# python eval.py --metadata datasets/clips_val.pkl --eval_freq 100 \
+#                --output_dir outputs/clips \
+#                --video_feature_type pixel --video_loader_type moviepy --chunk_len -1 \
+#                --video_feature_path /data/mmiemon/datasets/ego4d/v1/video_540ss \
+#                --resume pretrained_models/videorecap/videorecap_clip.pt \
+#                --video_encoder_ckpt /data/mmiemon/LaVila/pretrained_models/clip_openai_timesformer_base.baseline.ep_0003.pth \
+#                --batch_size 32 --workers 10
 
 #eval segment descriptions
 CUDA_VISIBLE_DEVICES=0 \
