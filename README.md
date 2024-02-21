@@ -19,7 +19,7 @@ See [installation.md](installation.md) to install this code.
 
 ## Download or extract features
 We utilize the video encoder of pretrained Dual-Encoder from [LaViLa](https://github.com/facebookresearch/LaViLa/blob/main/docs/MODEL_ZOO.md) to extract features. \
-**You can directly download the extracted features (~30 GB) from [this link]()**. \
+**You can directly download the extracted features (~30 GB) from [this link](https://drive.google.com/drive/folders/1vxslxr-la8acGhb0lN4y2qlE6JaKK8X9?usp=sharing) (coming soon)**. \
 Alternatively, you may extract the features on your own using the following steps.
 
 1. Download the pretrained video encoder using the following command.
@@ -104,3 +104,7 @@ You should get the following numbers.
 | --- | --- | --- | --- | --- |
 VideoReCap | 98.35/ 48.77/ 28.28 | 46.88/ 39.73/ 18.55 | 29.34/ 32.64/ 14.45 | [download](https://drive.google.com/drive/folders/1KlIbqhZ2lfngs0hc32zK2nnMVquYfzaC?usp=sharing)
 VideoReCap-U | 92.67/ 47.90/ 28.08 | 45.60/ 39.33/ 18.17 | 31.06/ 33.32/ 14.16 | [download](https://drive.google.com/file/d/1vWQIgxp0m2j32Z8MqspEuK_UM63gNVLo/view?usp=sharing)
+
+## Additional Supervision using LLMs
+
+Coming soon!
