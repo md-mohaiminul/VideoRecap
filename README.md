@@ -1,5 +1,7 @@
 # Video ReCap
 
+[[Paper](https://arxiv.org/abs/2402.13250)]  [[Website](https://sites.google.com/view/vidrecap)] [[Dataset](https://drive.google.com/drive/folders/14cMn3iqVw_FdH_JUjXDTZNG8e6m0FbnC?usp=share_link)]
+
 This is the official implementation of our paper [Video ReCap: Recursive Captioning of Hour-Long Videos](link). ViderReCap is a recursive video captioning model that can process very long videos (e.g., hours long) and output video captions at multiple hierarchy levels: short-range clip captions, mid-range segment descriptions, and long-range video summaries. First, the model generates captions for short video clips of a few seconds. As we move up the hierarchy, the model uses sparsely sampled video features and captions generated at the previous hierarchy level as inputs to produce video captions for the current hierarchy level.
 
 <img src="assets/framework.png"> 
@@ -86,7 +88,7 @@ bash scripts/run_videorecap_clip.sh
 ## Evaluate Pretrained Models
 
 We provide our best model for both VideoReCap and VideoReCap-U. \
-**Download the pretrained models from [this link]()**
+**Download the pretrained models from [this link](https://drive.google.com/drive/folders/1q-A3YYB1VaZ9JQqe49UwVja-f-r6HJZJ?usp=sharing)**
 1. Evaluate VideoReCap.
 ```bash
 bash scripts/eval_video_recap.sh
@@ -100,5 +102,5 @@ You should get the following numbers.
 
 | Model | Clip Caption<br>(C/ R/ M) | Segment Description<br>(C/ R/ M) | Video Summary<br>(C/ R/ M) | Checkpoint |
 | --- | --- | --- | --- | --- |
-VideoReCap | 98.35/ 48.77/ 28.28 | 46.88/ 39.73/ 18.55 | 29.34/ 32.64/ 14.45 | [download](link)
-VideoReCap-U | 92.67/ 47.90/ 28.08 | 45.60/ 39.33/ 18.17 | 31.06/ 33.32/ 14.16 | [download](link)
+VideoReCap | 98.35/ 48.77/ 28.28 | 46.88/ 39.73/ 18.55 | 29.34/ 32.64/ 14.45 | [download](https://drive.google.com/drive/folders/1KlIbqhZ2lfngs0hc32zK2nnMVquYfzaC?usp=sharing)
+VideoReCap-U | 92.67/ 47.90/ 28.08 | 45.60/ 39.33/ 18.17 | 31.06/ 33.32/ 14.16 | [download](https://drive.google.com/file/d/1vWQIgxp0m2j32Z8MqspEuK_UM63gNVLo/view?usp=sharing)
