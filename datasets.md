@@ -28,7 +28,7 @@ clip_caption:  ground-tuth clip caption
 
 
 
-## Segment Description
+## Video Summary
 ```videos_train.pkl``` and ```videos_val.pkl``` are the training and the validation files for long-range video summaries. ```videos_train_pseudo.pkl``` is the LLM-generated pseudo-annotations for segments.\
 Each file contains a list of dictionary containing following fields:
 ```
