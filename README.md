@@ -35,9 +35,9 @@ bash scripts/extract_features_segments.sh
 bash scripts/extract_features_videos.sh
 ```
 
-## Train VideoReCap Model
+## Train Video ReCap Model
 
-VideoReCap is a recursive model for hierarchical video captioning that uses captions generated at the previous level as input for the current hierarchy. We train VideoReCap utilizing the following curriculum learning strategy.
+Video ReCap is a recursive model for hierarchical video captioning that uses captions generated at the previous level as input for the current hierarchy. We train Video ReCap utilizing the following curriculum learning strategy.
 
 1. First, train for 5 epochs using the clip captions data.
 ```bash
@@ -47,7 +47,7 @@ bash scripts/run_videorecap_clip.sh
 ```bash
 bash scripts/extract_captions.sh
 ```
-3. Initialize from VideoReCap clip checkpoint and train for 10 epochs using the segment descriptions.
+3. Initialize from Video ReCap clip checkpoint and train for 10 epochs using the segment descriptions.
 ```bash
 bash scripts/run_videorecap_segment.sh
 ```
@@ -55,14 +55,14 @@ bash scripts/run_videorecap_segment.sh
 ```bash
 bash scripts/extract_segment_descriptions.sh
 ```
-5. Finally, initialize from VideoReCap segment checkpoint and train for 10 epochs using the video summaries.
+5. Finally, initialize from Video ReCap segment checkpoint and train for 10 epochs using the video summaries.
 ```bash
 bash scripts/run_videorecap_video.sh
 ```
 
-## Train VideoReCap-U Model
+## Train Video ReCap-U Model
 
-While VideoReCap trains three different sets of trainable parameters for three hierarchies, VideoReCap-U trains only one set of trainable parameters. Following curriculum learning scheme with an alternate batching technique allows us to train a unified model and avoid catestrophic foregetting.
+While Video ReCap trains three different sets of trainable parameters for three hierarchies, Video ReCap-U trains only one set of trainable parameters. Following curriculum learning scheme with an alternate batching technique allows us to train a unified model and avoid catestrophic foregetting.
 
 1. First stage is same as the VideRecap model, where we train for 5 epochs using the clip captions data.
 ```bash
@@ -72,7 +72,7 @@ bash scripts/run_videorecap_clip.sh
 ```bash
 bash scripts/extract_captions.sh
 ```
-3. Secondly, we initialize from VideoReCap clip checkpoint and train for 10 epochs using the segment descriptions and some clip captions data. We sample clip captions and segment descriptions alternatively at each bach. 
+3. Secondly, we initialize from Video ReCap clip checkpoint and train for 10 epochs using the segment descriptions and some clip captions data. We sample clip captions and segment descriptions alternatively at each bach. 
 ```bash
 bash scripts/run_videorecap_clip.sh
 ```
@@ -80,20 +80,20 @@ bash scripts/run_videorecap_clip.sh
 ```bash
 bash scripts/extract_segment_descriptions.sh
 ```
-5. Finally, we initialize from VideoReCap segment checkpoint and train for 10 epochs using the video summaries and some segment descriptions and clip captions data. We sample data from three hierarchies alternatively at each batch.
+5. Finally, we initialize from Video ReCap segment checkpoint and train for 10 epochs using the video summaries and some segment descriptions and clip captions data. We sample data from three hierarchies alternatively at each batch.
 ```bash
 bash scripts/run_videorecap_clip.sh
 ```
 
 ## Evaluate Pretrained Models
 
-We provide our best model for both VideoReCap and VideoReCap-U. \
+We provide our best model for both Video ReCap and Video ReCap-U. \
 **Download the pretrained models from [this link](https://drive.google.com/drive/folders/1q-A3YYB1VaZ9JQqe49UwVja-f-r6HJZJ?usp=sharing)**
-1. Evaluate VideoReCap.
+1. Evaluate Video ReCap.
 ```bash
 bash scripts/eval_video_recap.sh
 ```
-2. Evaluate VideoReCap-U.
+2. Evaluate Video ReCap-U.
 ```bash
 bash scripts/eval_video_recap_u.sh
 ```
@@ -102,8 +102,8 @@ You should get the following numbers.
 
 | Model | Clip Caption<br>(C/ R/ M) | Segment Description<br>(C/ R/ M) | Video Summary<br>(C/ R/ M) | Checkpoint |
 | --- | --- | --- | --- | --- |
-VideoReCap | 98.35/ 48.77/ 28.28 | 46.88/ 39.73/ 18.55 | 29.34/ 32.64/ 14.45 | [download](https://drive.google.com/drive/folders/1KlIbqhZ2lfngs0hc32zK2nnMVquYfzaC?usp=sharing)
-VideoReCap-U | 92.67/ 47.90/ 28.08 | 45.60/ 39.33/ 18.17 | 31.06/ 33.32/ 14.16 | [download](https://drive.google.com/file/d/1vWQIgxp0m2j32Z8MqspEuK_UM63gNVLo/view?usp=sharing)
+Video ReCap | 98.35/ 48.77/ 28.28 | 46.88/ 39.73/ 18.55 | 29.34/ 32.64/ 14.45 | [download](https://drive.google.com/drive/folders/1KlIbqhZ2lfngs0hc32zK2nnMVquYfzaC?usp=sharing)
+Video ReCap-U | 92.67/ 47.90/ 28.08 | 45.60/ 39.33/ 18.17 | 31.06/ 33.32/ 14.16 | [download](https://drive.google.com/file/d/1vWQIgxp0m2j32Z8MqspEuK_UM63gNVLo/view?usp=sharing)
 
 ## Additional Supervision using LLMs
 
