@@ -9,13 +9,9 @@ This is the official implementation of our paper [Video ReCap: Recursive Caption
 ## Installation
 See [installation.md](installation.md) to install this code.
 
-## Ego4D videos
-1. Get [License Agreement](https://ego4d-data.org/docs/start-here/#cli-download) and [download](https://github.com/facebookresearch/Ego4d/blob/main/ego4d/cli/README.md) the Ego4D videos. 
-2. Use [crop_and_resize.sh](scripts/crop_and_resize.sh) to crop and chunk the videos to the smaller side of 288 pixel and chunk length of 5 minutes. \
-(Note: This step is required for faster I/O. You can also evaluate the pretrained models without this step.)
-
 ## Ego4D-HCap Dataset
-[Download](https://drive.google.com/drive/folders/14cMn3iqVw_FdH_JUjXDTZNG8e6m0FbnC?usp=share_link) the dataset. See [datasets.md](datasets.md) for more details about the Ego4D-HCap Dataset.
+
+See [datasets.md](datasets.md) for the details and download the Ego4D-HCap Dataset.
 
 ## Download or extract features
 We utilize the video encoder of pretrained Dual-Encoder from [LaViLa](https://github.com/facebookresearch/LaViLa/blob/main/docs/MODEL_ZOO.md) to extract features. \
