@@ -110,7 +110,8 @@ Coming soon!
 ```BibTeX
 @article{islam2024video,
   title={Video ReCap: Recursive Captioning of Hour-Long Videos},
-  author={Islam, Md Mohaiminul and Ho, Ngan and Yang, Xitong and Nagarajan, Tushar and Torresani, Lorenzo and Bertasius, Gedas},
+  author={Islam, Md Mohaiminul and Ho, Ngan and Yang, Xitong and Nagarajan, Tushar and
+  Torresani, Lorenzo and Bertasius, Gedas},
   journal={arXiv preprint arXiv:2402.13250},
   year={2024}
 }
