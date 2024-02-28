@@ -104,3 +104,14 @@ Video ReCap-U | 92.67/ 47.90/ 28.08 | 45.60/ 39.33/ 18.17 | 31.06/ 33.32/ 14.16 
 ## Additional Supervision using LLMs
 
 Coming soon!
+
+## BibTex
+
+```BibTeX
+@article{islam2024video,
+  title={Video ReCap: Recursive Captioning of Hour-Long Videos},
+  author={Islam, Md Mohaiminul and Ho, Ngan and Yang, Xitong and Nagarajan, Tushar and Torresani, Lorenzo and Bertasius, Gedas},
+  journal={arXiv preprint arXiv:2402.13250},
+  year={2024}
+}
+```
