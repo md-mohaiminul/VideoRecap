@@ -8,17 +8,19 @@ pip install conda-pack
 ```
 2. Download [videorecap.tar.gz](https://drive.google.com/file/d/1lHm_-niZGW5f9bIT81ZWtMLH2pttI_lq/view?usp=sharing) environment.
 
-3. (a) Unpack the environment into a directory, activate the environment, and conda-unpack.
+3. Unzip the environment into a directory.
 ```
 mkdir -p videorecap
 tar -xzf videorecap.tar.gz -C videorecap
+```
+
+4. (a) Activate the environment, and conda-unpack.
+```
 source videorecap/bin/activate
 conda-unpack
 ```
-Or, 3 (b) Copy the environment to your anaconda 'envs' directory, activate the environment, and conda-unpack.
+Or, 4. (b) Copy the environment to your anaconda 'envs' directory, activate the environment, and conda-unpack.
 ```
-mkdir -p videorecap
-tar -xzf videorecap.tar.gz -C videorecap
 mv videorecap ANACONDA_DIRECTORY/envs
 conda activate videorecap
 conda-unpack
