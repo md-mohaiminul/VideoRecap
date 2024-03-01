@@ -42,3 +42,10 @@ pip install -r requirements.txt
 pip install git+https://github.com/Maluuba/nlg-eval.git@master
 nlg-eval --setup
 ```
+${\color{red}(N.B.)}$
+Currently, `nlg-eval --setup` is not working because some files have been deleted from their server. Alternatively, you can download our provided [nlgeval.zip](https://drive.google.com/file/d/1psevNdbfQM5HI2jfN6UVq57cWrqDm57G/view?usp=sharing) file and copy to your environment site-packages.
+
+```
+unzip nlgeval.zip
+mv nlgeval ANACODA_DIRECTORY/envs/videorecap/lib/python3.8/site-packages
+```
