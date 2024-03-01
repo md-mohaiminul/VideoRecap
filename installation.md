@@ -27,6 +27,8 @@ conda-unpack
 ```
 
 # Manual Installation
+Alternatively, you can install Video ReCap using the following steps.
+
 1. Create conda environment:
 ```
 conda create --name videorecap python=3.8
