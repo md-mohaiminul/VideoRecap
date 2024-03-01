@@ -49,5 +49,5 @@ Currently, `nlg-eval --setup` is not working because some files have been delete
 
 ```
 unzip nlgeval.zip
-mv nlgeval ANACODA_DIRECTORY/envs/videorecap/lib/python3.8/site-packages
+mv nlgeval ANACONDA_DIRECTORY/envs/videorecap/lib/python3.8/site-packages
 ```
