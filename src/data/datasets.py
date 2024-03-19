@@ -219,18 +219,6 @@ class VideoCaptionDataset(torch.utils.data.Dataset):
                     self.samples = json.load(f)
         else:
             self.samples = args.metadata
-        
-        # new = []
-        # for s in self.samples:
-        #     dur = (s['end_sec'] - s['start_sec'])/60
-        #     if dur<=1:
-        #         new.append(s)
-        # self.samples = new
-        
-        # if args.part is not None:
-        #     step = math.ceil(len(self.samples)/8)
-        #     print(args.part, args.part*step, (args.part+1)*step)
-        #     self.samples = self.samples[args.part*step : (args.part+1)*step]
             
         if subsample_stride>1:
             self.samples = self.samples[::subsample_stride]
@@ -275,6 +263,7 @@ class VideoCaptionDataset(torch.utils.data.Dataset):
                 start = int(s['start_sec']/4) if 'start_sec' in s else 0
                 end = int(s['end_sec']//4) if 'end_sec' in s else video_features.shape[0]
                 video_features = video_features[start:end+1]
+                
             if self.args.video_sampling_type=='uniform':
                 video_features = sample_features(video_features, self.args.video_sampling_type, self.args.num_video_feat)
             else:

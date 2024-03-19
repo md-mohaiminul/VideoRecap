@@ -40,8 +40,6 @@ def main(args):
     
     ckpt = torch.load(args.resume, map_location='cpu')
     old_args = ckpt['args']
-
-    old_args.video_encoder_ckpt='/data/mmiemon/LaVila/pretrained_models/clip_openai_timesformer_base.baseline.ep_0003.pth'
     old_args.output_dir = args.output_dir
     os.makedirs(args.output_dir, exist_ok = True)
 
@@ -50,7 +48,8 @@ def main(args):
         state_dict[k.replace('module.', '')] = v
 
     print("=> Creating model")
-    model = VideoRecap(old_args, use_vision_model_forced=True)
+    old_args.num_video_feat = args.num_video_feat    # number of frames for timesformer model
+    model = VideoRecap(old_args, use_vision_model_forced=True, eval_only=True)
     model = model.to(args.device)
     model.load_state_dict(state_dict, strict=False)
     print("=> loaded resume checkpoint '{}' (epoch {})".format(args.resume, ckpt['epoch']))
@@ -62,12 +61,13 @@ def main(args):
     torch.backends.cudnn.benchmark = True
     tokenizer = AutoTokenizer.from_pretrained(old_args.decoder_name)
     
-    # Caption
+    # Clip Caption
     old_args.metadata = 'datasets/clips_val.pkl'
     old_args.dataset = 'clip_caption'
     old_args.num_video_feat = 4
     old_args.video_feature_type='pixel'
-    old_args.chunk_len = -1
+    old_args.chunk_len = args.chunk_len
+    old_args.video_loader_type = args.video_loader_type
     old_args.video_feature_path = '/data/mmiemon/datasets/ego4d/v1/video_540ss'
     old_args.text_feature_type = None
     old_args.max_gen_tokens = 77
@@ -80,10 +80,8 @@ def main(args):
         transforms.CenterCrop(crop_size),
         transforms_video.NormalizeVideo(mean=[108.3272985, 116.7460125, 104.09373615000001], std=[68.5005327, 66.6321579, 70.32316305])
     ])
-    
     val_dataset = VideoCaptionDataset(old_args, transform=val_transform, 
                                       subsample_stride=old_args.eval_freq, is_training=False)
-
     collator = CaptionDataCollator(tokenizer, max_gen_tokens = old_args.max_gen_tokens,
                                     add_bos = True, add_eos = True, pad_token_id = 0)
     
@@ -97,13 +95,13 @@ def main(args):
     eval(args, val_dataset, val_loader, model, tokenizer, max_gen_tokens=old_args.max_gen_tokens, 
         dataset_name = old_args.dataset, output_dir = old_args.output_dir)
     
-    # Clip Summary
+    # Segment Description
     old_args = copy.deepcopy(old_args)
     old_args.metadata = 'datasets/segments_val.pkl'
     old_args.dataset = 'segment_description'
     old_args.video_feature_type='cls'
     old_args.num_video_feat = 512
-    old_args.video_feature_path = '/data/mmiemon/LaVila/datasets/features/vclm_base/cls'
+    old_args.video_feature_path = 'features/segments'
     old_args.max_gen_tokens = 77
     if old_args.hier_type == 'recur':
         old_args.text_feature_type = 'token'
@@ -112,10 +110,7 @@ def main(args):
         old_args.text_feature_type = None
     
     val_transform = None
-    
     val_dataset = VideoCaptionDataset(old_args, transform=val_transform, is_training=False)
-    
-
     collator = CaptionDataCollator(tokenizer, max_gen_tokens = old_args.max_gen_tokens,
                                     add_bos = True, add_eos = True, pad_token_id = 0)
     
@@ -144,9 +139,7 @@ def main(args):
         old_args.text_feature_type = None
     
     val_transform = None
-    
     val_dataset = VideoCaptionDataset(old_args, transform=val_transform, is_training=False)
-
     collator = CaptionDataCollator(tokenizer, max_gen_tokens = old_args.max_gen_tokens,
                                     add_bos = True, add_eos = True, pad_token_id = 0)
     
@@ -191,15 +184,14 @@ def eval(args, val_dataset, val_loader, model, tokenizer, max_gen_tokens, datase
                     jj = j * args.caption_num_return_sequences + k
                     generated_text_str = decode_one(generated_text_ids[jj], tokenizer).strip()
                 predictions.append(generated_text_str.strip().lower())
-                
+
                 if args.caption_num_return_sequences == 1:
                     if val_dataset.args.dataset == 'clip_caption':
                         references.append(sample[-1].strip().lower())
                     elif val_dataset.args.dataset == 'segment_description':
-                        references.append(sample['summary_text'].strip().lower())
+                        references.append(sample['segment_description'].strip().lower())
                     elif val_dataset.args.dataset == 'video_summary':
                         references.append(sample['video_summary'].strip().lower())
-                    
                 if val_dataset.args.dataset == 'clip_caption':
                     val_dataset.samples[indices[j].item()] = list(sample) + [generated_text_str]
                 else:

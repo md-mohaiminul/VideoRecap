@@ -5,6 +5,9 @@ from torch import Tensor
 import torch.nn.functional as F
 from einops import rearrange, repeat
 
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 from transformers.generation.logits_process import (
     LogitsProcessorList, TopKLogitsWarper, TopPLogitsWarper,
     TemperatureLogitsWarper, TypicalLogitsWarper, LogitNormalization
@@ -20,6 +23,8 @@ from .openai_clip import load as load_openai_clip
 from .timesformer import SpaceTimeTransformer
 
 from .mappers import get_mapper
+
+from huggingface_hub import PyTorchModelHubMixin
 
 class PositionalEncoding(nn.Module):
 
@@ -44,7 +49,8 @@ class PositionalEncoding(nn.Module):
 
 
 class VideoRecap(nn.Module):
-    def __init__(self, args, use_vision_model_forced=False):
+# class VideoRecap(nn.Module, PyTorchModelHubMixin):
+    def __init__(self, args, use_vision_model_forced=False, eval_only = False):
         super().__init__()
         
         if args.video_feature_type=='pixel' or use_vision_model_forced:
@@ -62,27 +68,29 @@ class VideoRecap(nn.Module):
                     is_tanh_gating=False,
                 )
 
-                clip_model, _ = load_openai_clip('ViT-B/16', 'cpu')
-                print("=> Loading CLIP (ViT-B/16) weights")
-                remapped_state_dict = remap_keys(clip_model.visual.state_dict(), transformer_layers=12)
-                res = vision_model.load_state_dict(remapped_state_dict, strict=False)
-                # print(res)
+                if not eval_only:
+                    clip_model, _ = load_openai_clip('ViT-B/16', 'cpu')
+                    print("=> Loading CLIP (ViT-B/16) weights")
+                    remapped_state_dict = remap_keys(clip_model.visual.state_dict(), transformer_layers=12)
+                    res = vision_model.load_state_dict(remapped_state_dict, strict=False)
+
                 vision_model.head = nn.Identity()
                 vision_model.pre_logits = nn.Identity()
                 vision_model.fc = nn.Identity()
                 
-                #freeze visual encoder
-                for n, p in vision_model.named_parameters():
-                    p.requires_grad = False
-                
-                #load contrastive VLP pretrained weights
-                print('Loading Video encoder from', args.video_encoder_ckpt)
-                checkpoint = torch.load(args.video_encoder_ckpt, map_location='cpu')
-                state_dict = OrderedDict()
-                for k, v in checkpoint['state_dict'].items():
-                    if 'visual' in k:
-                        state_dict[k.replace('module.visual.', '')] = v
-                vision_model.load_state_dict(state_dict, strict=True) 
+                if not eval_only:
+                    #freeze visual encoder
+                    for n, p in vision_model.named_parameters():
+                        p.requires_grad = False
+                    #load contrastive VLP pretrained weights
+                    print('Loading Video encoder from', args.video_encoder_ckpt)
+                    checkpoint = torch.load(args.video_encoder_ckpt, map_location='cpu')
+                    state_dict = OrderedDict()
+                    for k, v in checkpoint['state_dict'].items():
+                        if 'visual' in k:
+                            state_dict[k.replace('module.visual.', '')] = v
+                    vision_model.load_state_dict(state_dict, strict=True)
+
                 self.vision_model = vision_model
     
         if args.video_mapper_type is not None:

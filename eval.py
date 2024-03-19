@@ -3,13 +3,15 @@ from collections import OrderedDict
 import os.path as osp
 import json
 import pickle
-import os
 import torch
 import numpy as np
 import torchvision.transforms as transforms
 import torchvision.transforms._transforms_video as transforms_video
 from transformers import AutoTokenizer
 from tqdm import tqdm
+
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import evaluate
 from nlgeval import NLGEval
@@ -46,6 +48,7 @@ def main(args):
     old_args.video_feature_type = args.video_feature_type
     old_args.video_feature_path = args.video_feature_path
     old_args.video_encoder_ckpt = args.video_encoder_ckpt
+    old_args.video_loader_type = args.video_loader_type
     old_args.metadata = args.metadata
 
     old_args.chunk_len = args.chunk_len
@@ -92,7 +95,7 @@ def main(args):
         state_dict[k.replace('module.', '')] = v
 
     print("=> Creating model")
-    model = VideoRecap(old_args)
+    model = VideoRecap(old_args, eval_only= True)
     model = model.to(args.device)
     model.load_state_dict(state_dict, strict=True)
     print("=> loaded resume checkpoint '{}' (epoch {})".format(args.resume, ckpt['epoch']))
