@@ -1,5 +1,5 @@
 #eval clip captions if videos are raw Ego4D videos
-CUDA_VISIBLE_DEVICES=1 \
+CUDA_VISIBLE_DEVICES=0 \
 python eval.py --metadata datasets/clips_val.pkl --eval_freq 100 \
                --output_dir outputs/clips \
                --video_feature_type pixel --video_loader_type moviepy --chunk_len -1 \
