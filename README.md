@@ -18,7 +18,7 @@ See [datasets.md](datasets.md) for the details and download the Ego4D-HCap Datas
 
 ## [Demo Notebook](demo.ipynb)
 
-First, download the pretrained models from [this link](https://drive.google.com/drive/folders/1q-A3YYB1VaZ9JQqe49UwVja-f-r6HJZJ?usp=sharing). Then, you can extract three-levels of hierarchical captions using our pretrained models as shown in ```demo.ipynb``` notebook.
+First, download the pretrained models from [this link](https://drive.google.com/drive/folders/1q-A3YYB1VaZ9JQqe49UwVja-f-r6HJZJ?usp=sharing). Then, you can extract three-levels of hierarchical captions from any video (e.g., assets/example.mp4) using our pretrained models as shown in ```demo.ipynb``` notebook.
 
 ## Download or extract features
 We utilize the video encoder of pretrained Dual-Encoder from [LaViLa](https://github.com/facebookresearch/LaViLa/blob/main/docs/MODEL_ZOO.md) to extract features. \
