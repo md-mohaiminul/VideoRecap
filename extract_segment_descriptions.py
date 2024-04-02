@@ -42,13 +42,11 @@ def main(args):
     #Load checkpoint
     ckpt = torch.load(args.resume, map_location='cpu')
     old_args = ckpt['args']
-    
     old_args.video_feature_type = args.video_feature_type
     old_args.video_feature_path = args.video_feature_path
     old_args.metadata = args.metadata
     if old_args.video_sampling_type=='random':
         old_args.video_sampling_type = 'uniform'
-    
     print(old_args)
     
     # Create and load model
@@ -97,7 +95,7 @@ def main(args):
                     captions.append(c)
             dd['captions_pred'] = captions
             metadata.append(dd)
-                
+            
         old_args.metadata = metadata
         
         dataset = VideoCaptionDataset(old_args, transform=None)
@@ -147,7 +145,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser('Hierarchical Video Captioning', parents=[parents])
     parser.add_argument('--caption-sample', default='multinomial_sample',
                         choices=['multinomial_sample', 'beam_sample', 'group_beam_search'])
-    parser.add_argument('--feature_step', default=4, type=int, help="Extract one segment description at each 'feature_step' sconds")
+    parser.add_argument('--feature_step', default=180, type=int, help="Extract one segment description at each 'feature_step' sconds")
     parser.add_argument('--caption-top-k', default=None, type=int)
     parser.add_argument('--caption-top-p', default=0.95, type=float)
     parser.add_argument('--caption-num-beams', default=1, type=int)

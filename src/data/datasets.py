@@ -294,8 +294,8 @@ class VideoCaptionDataset(torch.utils.data.Dataset):
                     sample['video_mask'] = video_mask  
             else:
                 video_features = None
-            
-            sample['caption'] = self.samples[i]['video_summary']
+            if 'video_summary' in s:
+                sample['caption'] = self.samples[i]['video_summary']
                    
         else:
             raise NotImplementedError
