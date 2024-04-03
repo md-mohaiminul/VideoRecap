@@ -59,7 +59,7 @@ Video ReCap | 98.35/ 48.77/ 28.28 | 46.88/ 39.73/ 18.55 | 29.34/ 32.64/ 14.45 | 
 Video ReCap-U | 92.67/ 47.90/ 28.08 | 45.60/ 39.33/ 18.17 | 31.06/ 33.32/ 14.16 | [download](https://drive.google.com/file/d/1vWQIgxp0m2j32Z8MqspEuK_UM63gNVLo/view?usp=sharing)
 
 ## Train Video ReCap Model
-
+***We train our model on 8 V100 GPUs (32GB memory)***.\
 Video ReCap is a recursive model for hierarchical video captioning that uses captions generated at the previous level as input for the current hierarchy. We train Video ReCap utilizing the following curriculum learning strategy.
 
 1. Download pretrained Dual-Encoder from [LaViLa](https://github.com/facebookresearch/LaViLa/blob/main/docs/MODEL_ZOO.md) using the following command.
@@ -92,7 +92,7 @@ bash scripts/run_videorecap_video.sh
 ```
 
 ## Train Video ReCap-U Model
-
+***We train our model on 8 V100 GPUs (32GB memory)***.\
 While Video ReCap trains three different sets of trainable parameters for three hierarchies, Video ReCap-U trains only one set of trainable parameters. Following curriculum learning scheme with an alternate batching technique allows us to train a unified model and avoid catestrophic foregetting.
 
 1. Download pretrained Dual-Encoder from [LaViLa](https://github.com/facebookresearch/LaViLa/blob/main/docs/MODEL_ZOO.md) using the following command.
