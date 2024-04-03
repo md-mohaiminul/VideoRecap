@@ -9,5 +9,5 @@ EgoSchema
 scripts1
 temp
 videorecap.tar.gz
-
+__pycache__
 
