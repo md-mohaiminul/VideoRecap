@@ -1,9 +1,0 @@
-transformers
-evaluate
-einops
-timm
-decord
-h5py
-moviepy
-absl-py
-wandb
