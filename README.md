@@ -10,6 +10,6 @@ ViderReCap is a recursive video captioning model that can process very long vide
 <img src="assets/framework.png"> 
 
 
-<code style="color : name_color">**Code, models, and datasets are temporarily unavailable. We will release it soon.**</code>
+**Code, models, and datasets are temporarily unavailable. We will release it soon.**
 
 
