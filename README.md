@@ -56,7 +56,7 @@ You should get the following numbers.
 | Model | Clip Caption<br>(C/ R/ M) | Segment Description<br>(C/ R/ M) | Video Summary<br>(C/ R/ M) | Checkpoint |
 | --- | --- | --- | --- | --- |
 Video ReCap | 98.35/ 48.77/ 28.28 | 46.88/ 39.73/ 18.55 | 29.34/ 32.64/ 14.45 | [download](https://drive.google.com/drive/folders/1KlIbqhZ2lfngs0hc32zK2nnMVquYfzaC?usp=sharing)
-Video ReCap-U | 92.67/ 47.90/ 28.08 | 45.60/ 39.33/ 18.17 | 31.06/ 33.32/ 14.16 | [download](https://drive.google.com/file/d/1vWQIgxp0m2j32Z8MqspEuK_UM63gNVLo/view?usp=sharing)
+Video ReCap-U | 92.67/ 47.90/ 28.08 | 45.60/ 39.33/ 18.17 | 31.06/ 33.32/ 14.16 | [download](https://drive.google.com/file/d/1hsfm8ayCsOTFlVjvI-LCPXfS9MPstUwP/view?usp=sharing)
 
 ## Train Video ReCap Model
 ***We train our model on 8 V100 GPUs (32GB memory)***.\
